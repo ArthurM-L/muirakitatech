@@ -1,7 +1,6 @@
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { Fireflies } from "./Fireflies";
 import jungle from "@/assets/jungle-hero.jpg";
-import frog from "@/assets/frog-mascot.png";
 import { WHATSAPP_URL } from "./Navbar";
 
 export const Hero = () => {
@@ -21,13 +20,6 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
       <Fireflies count={18} />
 
-      {/* Frog mascot */}
-      <img
-        src={frog}
-        alt="Mascote sapo da Muirakitã Tech"
-        className="pointer-events-none absolute bottom-4 right-2 z-10 w-48 animate-float-mascot opacity-15 sm:w-64 md:right-12 md:w-80 md:opacity-100 lg:w-[28rem]"
-        loading="eager"
-      />
 
       <div className="container relative z-20 mx-auto">
         <div className="max-w-4xl">
