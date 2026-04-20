@@ -51,9 +51,9 @@ export const Services = () => {
             return (
               <article
                 key={c.title}
-                className={`glass-card group relative flex flex-col gap-4 p-6 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_8px_32px_hsl(var(--amazon-green)/0.25)] active:scale-[0.97] md:p-8 ${c.span ?? ""}`}
+                className={`glass-card group relative flex flex-col gap-4 p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-amazon/40 hover:shadow-[0_12px_40px_-12px_hsl(var(--amazon-green)/0.35)] md:p-8 ${c.span ?? ""}`}
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-amazon/30 bg-amazon/10 text-amazon transition-colors group-hover:border-amazon group-hover:text-gold">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-amazon/30 bg-amazon/10 text-amazon transition-colors duration-300 group-hover:border-amazon group-hover:text-gold">
                   <Icon className="h-6 w-6" />
                 </span>
                 <h3

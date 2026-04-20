@@ -25,7 +25,7 @@ export const Trust = () => {
             return (
               <article
                 key={p.title}
-                className="reveal-on-scroll flex flex-col items-start gap-4 rounded-2xl border border-amazon/15 bg-background/40 p-8 transition-all hover:border-amazon/40"
+                className="reveal-on-scroll flex flex-col items-start gap-4 rounded-2xl border border-amazon/15 bg-background/40 p-8 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-amazon/40 hover:shadow-[0_10px_30px_-12px_hsl(var(--amazon-green)/0.3)]"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-amazon/30 bg-amazon/10 text-amazon">
