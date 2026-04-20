@@ -1,32 +1,49 @@
 import { Cpu, Smartphone, Code2, Globe, ArrowLeftRight, MessageCircle } from "lucide-react";
 import { WHATSAPP_URL } from "./Navbar";
+import CardFlip from "@/components/ui/flip-card";
 
-type Card = {
-  icon: React.ElementType;
-  title: string;
-  body: string;
-  span?: string;
-  accent?: "gold" | "amazon";
-};
-
-const cards: Card[] = [
+const cards = [
   {
     icon: Cpu,
-    title: "Automações com Inteligência Artificial",
-    body: "Agentes de IA que trabalham 24h: respondem leads, qualificam clientes, disparam mensagens e integram sistemas — sem pausas, sem esquecimentos.",
-    span: "md:col-span-2",
-    accent: "gold",
+    title: "Automação com IA",
+    subtitle: "Agentes que trabalham 24h por você",
+    description:
+      "Agentes de IA que respondem leads, qualificam clientes e integram sistemas — sem pausas, sem esquecimentos.",
+    features: ["Atendimento 24/7", "Integração WhatsApp", "Qualificação de leads", "Relatórios automáticos"],
+    accent: "gold" as const,
   },
   {
     icon: Smartphone,
     title: "Criação de Apps",
-    body: "Aplicativos mobile e web sob medida. Do protótipo ao deploy, com foco em usabilidade e performance.",
-    span: "md:col-span-2 lg:col-span-1 lg:row-span-2",
-    accent: "amazon",
+    subtitle: "Mobile e web sob medida",
+    description: "Aplicativos sob medida — do protótipo ao deploy, com foco em usabilidade e performance.",
+    features: ["iOS + Android", "Design intuitivo", "Backend escalável", "Deploy nas lojas"],
+    accent: "amazon" as const,
   },
-  { icon: Code2, title: "Desenvolvimento de Sistemas", body: "Sistemas personalizados que automatizam, organizam e escalam sua operação." },
-  { icon: Globe, title: "Criação de Sites", body: "Landing pages, sites institucionais e e-commerce com identidade forte e foco em conversão." },
-  { icon: ArrowLeftRight, title: "Migração de Sistemas", body: "Modernize sua infraestrutura com segurança. Migramos sistemas legados sem perda de dados." },
+  {
+    icon: Code2,
+    title: "Sistemas Sob Medida",
+    subtitle: "Automatize, organize e escale",
+    description: "Sistemas personalizados que se moldam à sua operação — não o contrário.",
+    features: ["Painéis personalizados", "Automação de fluxos", "Multi-usuário", "Integrações via API"],
+    accent: "amazon" as const,
+  },
+  {
+    icon: Globe,
+    title: "Sites e Landing Pages",
+    subtitle: "Identidade forte, foco em conversão",
+    description: "Sites institucionais, landing pages e e-commerce com identidade visual forte e SEO desde o dia 1.",
+    features: ["SEO técnico", "Performance A+", "CMS editável", "Analytics integrado"],
+    accent: "gold" as const,
+  },
+  {
+    icon: ArrowLeftRight,
+    title: "Migração de Sistemas",
+    subtitle: "Modernize sem perder dados",
+    description: "Migramos sistemas legados com segurança, zero downtime e plano de rollback.",
+    features: ["Diagnóstico técnico", "Migração de dados", "Zero downtime", "Treinamento da equipe"],
+    accent: "amazon" as const,
+  },
 ];
 
 export const Services = () => {
@@ -41,32 +58,24 @@ export const Services = () => {
           </h2>
           <p className="mt-4 text-muted-foreground">
             Da <span className="text-amazon font-semibold">automação com IA</span> ao app completo —
-            entregamos tecnologia real para negócios reais.
+            passe o mouse nos cards para ver os detalhes.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {cards.map((c) => {
-            const Icon = c.icon;
-            return (
-              <article
-                key={c.title}
-                className={`glass-card group relative flex flex-col gap-4 p-6 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-amazon/40 hover:shadow-[0_12px_40px_-12px_hsl(var(--amazon-green)/0.35)] md:p-8 ${c.span ?? ""}`}
-              >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-amazon/30 bg-amazon/10 text-amazon transition-colors duration-300 group-hover:border-amazon group-hover:text-gold">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3
-                  className={`font-display text-2xl md:text-3xl ${
-                    c.accent === "gold" ? "text-gold" : "text-foreground"
-                  }`}
-                >
-                  {c.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">{c.body}</p>
-              </article>
-            );
-          })}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((c) => (
+            <CardFlip
+              key={c.title}
+              icon={c.icon}
+              title={c.title}
+              subtitle={c.subtitle}
+              description={c.description}
+              features={c.features}
+              accent={c.accent}
+              ctaLabel="Quero esse serviço"
+              onCtaClick={() => window.open(WHATSAPP_URL, "_blank", "noopener,noreferrer")}
+            />
+          ))}
         </div>
 
         <div className="mt-12 flex justify-center">
