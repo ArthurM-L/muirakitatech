@@ -1,7 +1,6 @@
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { Fireflies } from "./Fireflies";
 import jungle from "@/assets/jungle-hero.jpg";
-import frog from "@/assets/frog-mascot.png";
 import { WHATSAPP_URL } from "./Navbar";
 
 export const Hero = () => {

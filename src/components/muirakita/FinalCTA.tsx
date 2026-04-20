@@ -1,5 +1,4 @@
 import { Instagram, MessageCircle } from "lucide-react";
-import frog from "@/assets/frog-laptop.png";
 import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "./Navbar";
 import { ExpandableContactCTA } from "./ExpandableContactCTA";
 
@@ -8,12 +7,6 @@ export const FinalCTA = () => {
     <section id="contato-final" className="relative overflow-hidden py-24 md:py-32">
       <div className="absolute inset-0 animate-breathe" aria-hidden="true" />
       <div className="container relative mx-auto text-center">
-        <img
-          src={frog}
-          alt="Mascote sapo programando"
-          loading="lazy"
-          className="mx-auto w-48 animate-float-mascot sm:w-64 md:w-80"
-        />
         <h2
           className="mt-6 font-display text-foreground"
           style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
