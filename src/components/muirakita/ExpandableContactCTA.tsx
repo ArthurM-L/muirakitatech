@@ -1,7 +1,6 @@
 import { useState, useEffect, FormEvent } from "react";
 import { X, Check, ArrowRight, Leaf, MessageCircle, Sparkles } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MeshGradient } from "@paper-design/shaders-react";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "./Navbar";
@@ -127,25 +126,27 @@ export const ExpandableContactCTA = ({
     };
   }, [isExpanded]);
 
+  const SPRING = { type: "spring" as const, stiffness: 280, damping: 32, mass: 0.9 };
+
   return (
-    <>
-      <AnimatePresence initial={false}>
+    <LayoutGroup>
+      <AnimatePresence initial={false} mode="wait">
         {!isExpanded && (
           <motion.div className={`relative inline-block ${className}`}>
             <motion.div
               style={{ borderRadius: "100px" }}
-              layout
               layoutId={layoutId}
+              transition={SPRING}
               className="absolute inset-0 bg-gradient-to-r from-amazon via-leaf to-amazon shadow-[0_0_40px_-8px_hsl(var(--amazon-green)/0.6)]"
             />
             <motion.button
               type="button"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsExpanded(true)}
-              className="relative inline-flex items-center gap-3 px-8 py-4 text-base font-semibold uppercase tracking-wider text-background hover:opacity-95 sm:text-lg"
+              className="relative inline-flex items-center gap-3 px-8 py-4 text-base font-semibold uppercase tracking-wider text-background transition-opacity hover:opacity-95 sm:text-lg"
             >
               <Leaf className="h-5 w-5" />
               {label}
@@ -160,31 +161,20 @@ export const ExpandableContactCTA = ({
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-0 sm:p-4">
             <motion.div
               layoutId={layoutId}
-              transition={{ type: "spring", bounce: 0, duration: 0.45 }}
+              transition={SPRING}
               style={{ borderRadius: "24px" }}
-              layout
               className="relative flex h-full w-full overflow-hidden bg-[hsl(var(--deep-jungle))] shadow-2xl sm:rounded-[24px]"
             >
-              {/* Animated mesh background — jungle palette */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
+              {/* Soft static gradient — lighter than mesh shader */}
+              <div
                 className="pointer-events-none absolute inset-0"
                 aria-hidden="true"
-              >
-                <MeshGradient
-                  speed={0.5}
-                  colors={["#0D1A0D", "#1A3A1A", "#2D6A12", "#4CAF1E"]}
-                  distortion={0.85}
-                  swirl={0.15}
-                  grainMixer={0.18}
-                  grainOverlay={0}
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </motion.div>
-              <div className="pointer-events-none absolute inset-0 leaf-pattern opacity-40" />
+                style={{
+                  background:
+                    "radial-gradient(circle at 20% 20%, hsl(96 70% 25% / 0.55), transparent 55%), radial-gradient(circle at 80% 80%, hsl(120 37% 17% / 0.85), transparent 60%), linear-gradient(135deg, hsl(120 33% 8%) 0%, hsl(120 37% 12%) 100%)",
+                }}
+              />
+              <div className="pointer-events-none absolute inset-0 leaf-pattern opacity-25" />
 
               <button
                 type="button"
@@ -196,9 +186,9 @@ export const ExpandableContactCTA = ({
               </button>
 
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col overflow-y-auto lg:flex-row lg:overflow-hidden"
               >
                 {/* Left: brand story */}
@@ -413,7 +403,7 @@ export const ExpandableContactCTA = ({
           </div>
         )}
       </AnimatePresence>
-    </>
+    </LayoutGroup>
   );
 };
 
