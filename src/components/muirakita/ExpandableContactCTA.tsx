@@ -36,7 +36,12 @@ export const ExpandableContactCTA = ({
     company: "",
     service: services[0],
     message: "",
+    website: "", // honeypot — must stay empty
   });
+  const formLoadedAt = useState(() => Date.now())[0];
+
+  const RATE_LIMIT_KEY = "muirakita_last_contact_at";
+  const RATE_LIMIT_MS = 30_000; // 30s between submissions
 
   const handleClose = () => {
     setIsExpanded(false);
@@ -61,6 +66,31 @@ export const ExpandableContactCTA = ({
       toast.error("Preencha nome e mensagem.");
       return;
     }
+
+    // Honeypot — bots fill hidden fields. Silently fake success.
+    if (form.website.trim() !== "") {
+      setStep("success");
+      return;
+    }
+
+    // Time trap — humans take >2s to fill the form.
+    if (Date.now() - formLoadedAt < 2000) {
+      toast.error("Aguarde um instante e tente novamente.");
+      return;
+    }
+
+    // Client-side rate limit (best-effort, not abuse-proof).
+    try {
+      const last = Number(localStorage.getItem(RATE_LIMIT_KEY) || 0);
+      const wait = RATE_LIMIT_MS - (Date.now() - last);
+      if (wait > 0) {
+        toast.error(`Aguarde ${Math.ceil(wait / 1000)}s antes de enviar novamente.`);
+        return;
+      }
+    } catch {
+      // ignore storage errors
+    }
+
     setStep("submitting");
     const { error } = await supabase.from("contact_messages").insert({
       name: form.name.trim().slice(0, 200),
@@ -76,6 +106,11 @@ export const ExpandableContactCTA = ({
       toast.error("Não conseguimos registrar. Vamos te levar pro WhatsApp.");
     } else {
       toast.success("Mensagem registrada! Abrindo WhatsApp…");
+      try {
+        localStorage.setItem(RATE_LIMIT_KEY, String(Date.now()));
+      } catch {
+        // ignore
+      }
     }
 
     setStep("success");
@@ -250,6 +285,28 @@ export const ExpandableContactCTA = ({
                       </motion.div>
                     ) : (
                       <form onSubmit={handleSubmit} className="space-y-5">
+                        {/* Honeypot — invisible to humans, attractive to bots */}
+                        <div
+                          aria-hidden="true"
+                          style={{
+                            position: "absolute",
+                            left: "-10000px",
+                            width: "1px",
+                            height: "1px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <label>
+                            Não preencha este campo
+                            <input
+                              type="text"
+                              tabIndex={-1}
+                              autoComplete="off"
+                              value={form.website}
+                              onChange={(e) => setForm({ ...form, website: e.target.value })}
+                            />
+                          </label>
+                        </div>
                         <div className="space-y-1">
                           <h3 className="font-display text-2xl uppercase tracking-wide text-foreground">
                             Conta seu projeto
