@@ -1,10 +1,11 @@
-import { MessageCircle, Instagram } from "lucide-react";
+import { Instagram, MessageCircle } from "lucide-react";
 import frog from "@/assets/frog-laptop.png";
-import { WHATSAPP_URL } from "./Navbar";
+import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "./Navbar";
+import { ExpandableContactCTA } from "./ExpandableContactCTA";
 
 export const FinalCTA = () => {
   return (
-    <section id="contato" className="relative overflow-hidden py-24 md:py-32">
+    <section id="contato-final" className="relative overflow-hidden py-24 md:py-32">
       <div className="absolute inset-0 animate-breathe" aria-hidden="true" />
       <div className="container relative mx-auto text-center">
         <img
@@ -25,17 +26,19 @@ export const FinalCTA = () => {
           construir juntos.
         </p>
         <div className="mt-10 flex justify-center">
+          <ExpandableContactCTA layoutId="cta-final" label="Iniciar conversa" />
+        </div>
+        <p className="mt-8 text-sm text-muted-foreground">
+          Prefere direto?{" "}
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex animate-heartbeat items-center justify-center gap-3 rounded-full bg-whatsapp px-10 py-5 text-base font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 sm:text-lg"
+            className="inline-flex items-center gap-1 text-whatsapp hover:underline"
           >
-            <MessageCircle className="h-6 w-6" /> Chamar no WhatsApp
-          </a>
-        </div>
-        <p className="mt-6 text-sm text-muted-foreground">
-          Ou nos encontre no Instagram:{" "}
+            <MessageCircle className="h-4 w-4" /> {WHATSAPP_DISPLAY}
+          </a>{" "}
+          · Instagram:{" "}
           <a
             href="https://instagram.com/muirakitatech"
             target="_blank"
