@@ -4,6 +4,7 @@ import { Services } from "@/components/muirakita/Services";
 import { Automation } from "@/components/muirakita/Automation";
 import { Story } from "@/components/muirakita/Story";
 import { Trust } from "@/components/muirakita/Trust";
+import { Contact } from "@/components/muirakita/Contact";
 import { FinalCTA } from "@/components/muirakita/FinalCTA";
 import { Footer } from "@/components/muirakita/Footer";
 
@@ -16,6 +17,7 @@ const Index = () => {
       <Automation />
       <Story />
       <Trust />
+      <Contact />
       <FinalCTA />
       <Footer />
     </main>
