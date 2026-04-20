@@ -1,12 +1,12 @@
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Leaf, BrainCircuit, Zap, Smartphone, CheckCircle2, type LucideIcon } from "lucide-react";
 import { WHATSAPP_URL } from "./Navbar";
 
-const nodes = [
-  { emoji: "🌿", label: "Lead Recebido" },
-  { emoji: "🧠", label: "IA Analisa" },
-  { emoji: "⚡", label: "Sistema Age" },
-  { emoji: "📲", label: "Cliente Notificado" },
-  { emoji: "✅", label: "Resultado Entregue" },
+const nodes: { Icon: LucideIcon; label: string; color: string }[] = [
+  { Icon: Leaf, label: "Lead Recebido", color: "hsl(var(--amazon-green))" },
+  { Icon: BrainCircuit, label: "IA Analisa", color: "hsl(var(--gold))" },
+  { Icon: Zap, label: "Sistema Age", color: "hsl(var(--orange))" },
+  { Icon: Smartphone, label: "Cliente Notificado", color: "hsl(var(--leaf))" },
+  { Icon: CheckCircle2, label: "Resultado Entregue", color: "hsl(var(--amazon-green))" },
 ];
 
 export const Automation = () => {
@@ -111,8 +111,8 @@ export const Automation = () => {
                 className="absolute flex w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 text-center"
                 style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)` }}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amazon/40 bg-card text-2xl shadow-[0_0_20px_hsl(var(--amazon-green)/0.4)]">
-                  {n.emoji}
+                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amazon/40 bg-card shadow-[0_0_20px_hsl(var(--amazon-green)/0.4)]">
+                  <n.Icon className="h-5 w-5" style={{ color: n.color }} strokeWidth={2} />
                 </div>
                 <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
                   {n.label}

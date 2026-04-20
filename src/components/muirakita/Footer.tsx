@@ -11,7 +11,7 @@ export const Footer = () => {
             <div className="font-display text-2xl tracking-wider">
               Muirakitã <span className="text-amazon">Tech</span>
             </div>
-            <p className="mt-1 text-sm text-muted-foreground">Da Amazônia para o digital 🐸</p>
+            <p className="mt-1 text-sm text-muted-foreground">Da Amazônia para o digital.</p>
           </div>
         </div>
         <div className="flex flex-col gap-3 md:items-end">
