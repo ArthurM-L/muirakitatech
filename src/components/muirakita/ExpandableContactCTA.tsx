@@ -285,6 +285,28 @@ export const ExpandableContactCTA = ({
                       </motion.div>
                     ) : (
                       <form onSubmit={handleSubmit} className="space-y-5">
+                        {/* Honeypot — invisible to humans, attractive to bots */}
+                        <div
+                          aria-hidden="true"
+                          style={{
+                            position: "absolute",
+                            left: "-10000px",
+                            width: "1px",
+                            height: "1px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <label>
+                            Não preencha este campo
+                            <input
+                              type="text"
+                              tabIndex={-1}
+                              autoComplete="off"
+                              value={form.website}
+                              onChange={(e) => setForm({ ...form, website: e.target.value })}
+                            />
+                          </label>
+                        </div>
                         <div className="space-y-1">
                           <h3 className="font-display text-2xl uppercase tracking-wide text-foreground">
                             Conta seu projeto
