@@ -12,7 +12,7 @@ import { StickyMobileCTA } from "@/components/muirakita/StickyMobileCTA";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
+    <main className="min-h-screen bg-background text-foreground antialiased pb-20 md:pb-0">
       <Navbar />
       <Hero />
       <Showcase />
