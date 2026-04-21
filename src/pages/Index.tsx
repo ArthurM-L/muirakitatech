@@ -8,10 +8,11 @@ import { Trust } from "@/components/muirakita/Trust";
 import { Contact } from "@/components/muirakita/Contact";
 import { FinalCTA } from "@/components/muirakita/FinalCTA";
 import { Footer } from "@/components/muirakita/Footer";
+import { StickyMobileCTA } from "@/components/muirakita/StickyMobileCTA";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
+    <main className="min-h-screen bg-background text-foreground antialiased pb-20 md:pb-0">
       <Navbar />
       <Hero />
       <Showcase />
@@ -22,6 +23,7 @@ const Index = () => {
       <Contact />
       <FinalCTA />
       <Footer />
+      <StickyMobileCTA />
     </main>
   );
 };
