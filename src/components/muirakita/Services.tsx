@@ -48,7 +48,7 @@ const cards = [
 
 export const Services = () => {
   return (
-    <section id="servicos" className="relative overflow-hidden py-24 md:py-32">
+    <section id="servicos" className="relative overflow-hidden py-16 md:py-24">
       <div className="absolute inset-0 leaf-pattern opacity-40" aria-hidden="true" />
       <div className="container relative mx-auto">
         <header className="mb-12 max-w-3xl reveal-on-scroll">

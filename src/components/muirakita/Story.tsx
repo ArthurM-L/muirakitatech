@@ -1,6 +1,6 @@
 export const Story = () => {
   return (
-    <section id="historia" className="relative overflow-hidden py-24 md:py-32">
+    <section id="historia" className="relative overflow-hidden py-16 md:py-24">
       {/* Jaguar silhouette */}
       <svg
         aria-hidden="true"

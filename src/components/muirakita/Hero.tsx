@@ -18,20 +18,20 @@ export const Hero = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
-      <Fireflies count={18} />
+      <Fireflies count={10} />
 
 
       <div className="container relative z-20 mx-auto">
         <div className="max-w-4xl">
           <div className="overflow-hidden">
-            <h1 className="animate-clip-reveal font-display text-foreground" style={{ fontSize: "clamp(3rem, 8vw, 8rem)" }}>
+            <h1 className="animate-clip-reveal font-display text-foreground" style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)" }}>
               Nascidos na Selva,
             </h1>
           </div>
           <div className="overflow-hidden">
             <h1
               className="animate-clip-reveal font-display text-amazon"
-              style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.15s" }}
+              style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)", animationDelay: "0.15s" }}
             >
               Feitos para a Tech.
             </h1>
@@ -55,7 +55,7 @@ export const Hero = () => {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex animate-heartbeat items-center justify-center gap-2 rounded-full bg-whatsapp px-7 py-4 text-sm font-semibold text-black transition-transform hover:scale-105 sm:text-base"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-7 py-4 text-sm font-semibold text-black shadow-[0_0_24px_-6px_hsl(var(--whatsapp)/0.7)] transition-transform hover:scale-105 sm:text-base"
             >
               <MessageCircle className="h-5 w-5" /> Chamar no WhatsApp
             </a>
