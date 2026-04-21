@@ -4,6 +4,7 @@ import { Showcase } from "@/components/muirakita/Showcase";
 import { Services } from "@/components/muirakita/Services";
 import { Automation } from "@/components/muirakita/Automation";
 import { Story } from "@/components/muirakita/Story";
+import { SocialProof } from "@/components/muirakita/SocialProof";
 import { Trust } from "@/components/muirakita/Trust";
 import { Contact } from "@/components/muirakita/Contact";
 import { FinalCTA } from "@/components/muirakita/FinalCTA";
@@ -17,6 +18,7 @@ const Index = () => {
       <Hero />
       <Showcase />
       <Services />
+      <SocialProof />
       <Automation />
       <Story />
       <Trust />
