@@ -27,7 +27,7 @@
     --secondary-foreground: 60 18% 93%;
 
     --muted: 120 22% 13%;
-    --muted-foreground: 96 7% 63%;     /* #9BA89B */
+    --muted-foreground: 96 8% 72%;     /* Improved contrast (WCAG AA) */
 
     --accent: 44 80% 46%;              /* #D4A017 gold */
     --accent-foreground: 120 33% 8%;
