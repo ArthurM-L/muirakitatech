@@ -12,7 +12,7 @@ const nodes: { Icon: LucideIcon; label: string; color: string }[] = [
 export const Automation = () => {
   const radius = 140;
   return (
-    <section id="automacao" className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section id="automacao" className="relative overflow-hidden bg-background py-16 md:py-24">
       {/* Bioluminescent glow */}
       <div
         aria-hidden="true"

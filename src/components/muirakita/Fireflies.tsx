@@ -1,9 +1,19 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const Fireflies = ({ count = 18 }: { count?: number }) => {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const flies = useMemo(
     () =>
-      Array.from({ length: count }).map((_, i) => ({
+      Array.from({ length: count }).map(() => ({
         left: Math.random() * 100,
         size: 2 + Math.random() * 3,
         duration: 6 + Math.random() * 5,
@@ -12,6 +22,8 @@ export const Fireflies = ({ count = 18 }: { count?: number }) => {
       })),
     [count]
   );
+
+  if (reduced) return null;
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {flies.map((f, i) => (
