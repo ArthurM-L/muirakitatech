@@ -1,13 +1,19 @@
-import { ExpandableContactCTA } from "./ExpandableContactCTA";
+import { InlineContactForm } from "./InlineContactForm";
 import { Leaf, Sparkles, ShieldCheck } from "lucide-react";
 
 export const Contact = () => {
   return (
-    <section id="contato" className="relative overflow-hidden border-y border-amazon/15 py-24 md:py-32">
+    <section
+      id="contato"
+      className="relative overflow-hidden border-y border-amazon/15 py-20 md:py-28"
+    >
       <div className="absolute inset-0 leaf-pattern opacity-60" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-[hsl(var(--bg-card))]/40 to-background" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-background via-[hsl(var(--bg-card))]/40 to-background"
+        aria-hidden="true"
+      />
 
-      <div className="container relative mx-auto grid gap-12 md:grid-cols-2 md:items-center">
+      <div className="container relative mx-auto grid gap-12 md:grid-cols-2 md:items-start">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-amazon/30 bg-background/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amazon">
             <Sparkles className="h-3.5 w-3.5" /> Fale com a gente
@@ -40,14 +46,13 @@ export const Contact = () => {
           </ul>
         </div>
 
-        <div className="flex justify-center md:justify-end">
+        <div className="relative">
+          <div
+            className="absolute -inset-8 rounded-3xl bg-amazon/15 blur-3xl"
+            aria-hidden="true"
+          />
           <div className="relative">
-            <div className="absolute -inset-8 rounded-full bg-amazon/20 blur-3xl" aria-hidden="true" />
-            <ExpandableContactCTA
-              layoutId="cta-contact"
-              label="Enviar uma mensagem"
-              className="relative"
-            />
+            <InlineContactForm />
           </div>
         </div>
       </div>

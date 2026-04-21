@@ -8,6 +8,7 @@ import { Trust } from "@/components/muirakita/Trust";
 import { Contact } from "@/components/muirakita/Contact";
 import { FinalCTA } from "@/components/muirakita/FinalCTA";
 import { Footer } from "@/components/muirakita/Footer";
+import { StickyMobileCTA } from "@/components/muirakita/StickyMobileCTA";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       <Contact />
       <FinalCTA />
       <Footer />
+      <StickyMobileCTA />
     </main>
   );
 };
