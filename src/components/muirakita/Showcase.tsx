@@ -6,20 +6,20 @@ export const Showcase = () => {
     <section className="relative overflow-hidden bg-background">
       <ContainerScroll
         titleComponent={
-          <>
-            <h2 className="font-display text-foreground text-3xl md:text-5xl">
+          <div className="px-4">
+            <h2 className="font-display text-foreground text-2xl md:text-4xl">
               Tecnologia que cresce
             </h2>
             <h2
-              className="font-display text-amazon font-bold mt-1 leading-none"
-              style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+              className="font-display text-amazon font-bold leading-tight"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
               como a floresta
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
               Da Amazônia para o digital — soluções vivas, escaláveis e sustentáveis.
             </p>
-          </>
+          </div>
         }
       >
         <img
