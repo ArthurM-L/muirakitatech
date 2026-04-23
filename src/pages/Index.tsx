@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/muirakita/Navbar";
 import { Hero } from "@/components/muirakita/Hero";
-import { Showcase } from "@/components/muirakita/Showcase";
 import { Services } from "@/components/muirakita/Services";
 import { Automation } from "@/components/muirakita/Automation";
 import { Story } from "@/components/muirakita/Story";
@@ -16,7 +15,6 @@ const Index = () => {
     <main className="min-h-screen bg-background text-foreground antialiased pb-20 md:pb-0">
       <Navbar />
       <Hero />
-      <Showcase />
       <Services />
       <SocialProof />
       <Automation />
