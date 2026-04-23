@@ -1,6 +1,7 @@
-import { Instagram, MessageCircle, Leaf } from "lucide-react";
+import { Instagram, Mail, MessageCircle, Leaf } from "lucide-react";
 import { FrogLogo } from "./FrogLogo";
 import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "./Navbar";
+import { EMAIL_ADDRESS, EMAIL_URL } from "./FinalCTA";
 
 const services = [
   { href: "#servicos", label: "Automação com IA" },
