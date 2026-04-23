@@ -7,7 +7,7 @@ export const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[100svh] w-full items-center overflow-hidden pt-20"
+      className="relative flex min-h-[78svh] w-full items-center overflow-hidden pt-24 pb-12 md:min-h-[85svh] md:pt-28 md:pb-16"
     >
       {/* Background */}
       <img
@@ -30,7 +30,7 @@ export const Hero = () => {
           </div>
           <div className="overflow-hidden">
             <h1
-              className="animate-clip-reveal font-display text-amazon"
+              className="animate-clip-reveal font-display text-gradient-amazon"
               style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", animationDelay: "0.15s" }}
             >
               Feitos para a Tech.
