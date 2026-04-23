@@ -13,6 +13,7 @@ import { FinalCTA } from "@/components/muirakita/FinalCTA";
 import { Footer } from "@/components/muirakita/Footer";
 import { StickyMobileCTA } from "@/components/muirakita/StickyMobileCTA";
 import { WhatsAppFAB } from "@/components/muirakita/WhatsAppFAB";
+import AgentChatWidget from "@/components/muirakita/AgentChatWidget";
 
 const Index = () => {
   return (
@@ -32,6 +33,7 @@ const Index = () => {
       <Footer />
       <StickyMobileCTA />
       <WhatsAppFAB />
+      <AgentChatWidget />
     </main>
   );
 };
