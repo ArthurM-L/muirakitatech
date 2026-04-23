@@ -84,6 +84,14 @@ export const Footer = () => {
             </li>
             <li>
               <a
+                href={EMAIL_URL}
+                className="inline-flex items-center gap-2 break-all text-foreground hover:text-amazon"
+              >
+                <Mail className="h-4 w-4 text-gold" /> {EMAIL_ADDRESS}
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://instagram.com/muirakitatech"
                 target="_blank"
                 rel="noopener noreferrer"
