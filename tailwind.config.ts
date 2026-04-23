@@ -12,8 +12,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', "Impact", "sans-serif"],
-        body: ['"Work Sans"', "system-ui", "sans-serif"],
+        display: ['"Unbounded"', '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+        body: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
