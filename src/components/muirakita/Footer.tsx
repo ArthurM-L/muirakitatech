@@ -1,6 +1,7 @@
-import { Instagram, MessageCircle, Leaf } from "lucide-react";
+import { Instagram, Mail, MessageCircle, Leaf } from "lucide-react";
 import { FrogLogo } from "./FrogLogo";
 import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "./Navbar";
+import { EMAIL_ADDRESS, EMAIL_URL } from "./FinalCTA";
 
 const services = [
   { href: "#servicos", label: "Automação com IA" },
@@ -79,6 +80,14 @@ export const Footer = () => {
                 className="inline-flex items-center gap-2 text-foreground hover:text-amazon"
               >
                 <MessageCircle className="h-4 w-4 text-whatsapp" /> {WHATSAPP_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a
+                href={EMAIL_URL}
+                className="inline-flex items-center gap-2 break-all text-foreground hover:text-amazon"
+              >
+                <Mail className="h-4 w-4 text-gold" /> {EMAIL_ADDRESS}
               </a>
             </li>
             <li>
