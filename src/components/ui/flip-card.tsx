@@ -27,19 +27,21 @@ export default function CardFlip({
 }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const accentText = accent === "gold" ? "text-gold" : "text-amazon";
+  const accentText = "text-gradient-amazon";
   const accentBorder = accent === "gold" ? "group-hover:border-gold/50" : "group-hover:border-amazon/50";
 
   return (
     <div
       className={cn(
-        "group relative h-[360px] w-full [perspective:2000px]",
+        "group relative h-[360px] w-full cursor-pointer [perspective:2000px]",
         className,
       )}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onFocus={() => setIsFlipped(true)}
       onBlur={() => setIsFlipped(false)}
+      onClick={() => setIsFlipped((v) => !v)}
+      role="button"
       tabIndex={0}
     >
       <div
