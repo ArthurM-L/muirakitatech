@@ -53,13 +53,22 @@ export const Services = () => {
       <div className="container relative mx-auto">
         <header className="mb-12 max-w-3xl reveal-on-scroll">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-amazon">Serviços</p>
-          <h2 className="font-display text-gold" style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}>
+          <h2 className="font-display text-gradient-amazon" style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}>
             O que a Muirakitã Tech faz
           </h2>
           <p className="mt-4 text-muted-foreground">
             Da <span className="text-amazon font-semibold">automação com IA</span> ao app completo —
-            passe o mouse nos cards para ver os detalhes.
+            <span className="hidden sm:inline"> passe o mouse nos cards para ver os detalhes.</span>
+            <span className="sm:hidden"> toque nos cards para ver os detalhes.</span>
           </p>
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-amazon/30 bg-amazon/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-amazon">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amazon opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-amazon" />
+            </span>
+            <span className="hidden sm:inline">Passe o mouse · Interativo</span>
+            <span className="sm:hidden">Toque para interagir</span>
+          </div>
         </header>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

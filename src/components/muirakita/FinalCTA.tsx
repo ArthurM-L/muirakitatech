@@ -8,7 +8,7 @@ export const FinalCTA = () => {
       <div className="absolute inset-0 animate-breathe" aria-hidden="true" />
       <div className="container relative mx-auto text-center">
         <h2
-          className="mt-6 font-display text-foreground"
+          className="mt-6 font-display text-gradient-amazon"
           style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
         >
           Pronto para evoluir?
