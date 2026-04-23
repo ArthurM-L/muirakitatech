@@ -24,14 +24,14 @@ export const Hero = () => {
       <div className="container relative z-20 mx-auto">
         <div className="max-w-4xl">
           <div className="overflow-hidden">
-            <h1 className="animate-clip-reveal font-display text-foreground" style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)" }}>
+            <h1 className="animate-clip-reveal font-display text-foreground" style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}>
               Nascidos na Selva,
             </h1>
           </div>
           <div className="overflow-hidden">
             <h1
               className="animate-clip-reveal font-display text-amazon"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 6rem)", animationDelay: "0.15s" }}
+              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", animationDelay: "0.15s" }}
             >
               Feitos para a Tech.
             </h1>
