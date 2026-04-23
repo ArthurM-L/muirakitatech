@@ -12,6 +12,7 @@ import { Contact } from "@/components/muirakita/Contact";
 import { FinalCTA } from "@/components/muirakita/FinalCTA";
 import { Footer } from "@/components/muirakita/Footer";
 import { StickyMobileCTA } from "@/components/muirakita/StickyMobileCTA";
+import { WhatsAppFAB } from "@/components/muirakita/WhatsAppFAB";
 
 const Index = () => {
   return (
@@ -30,6 +31,7 @@ const Index = () => {
       <FinalCTA />
       <Footer />
       <StickyMobileCTA />
+      <WhatsAppFAB />
     </main>
   );
 };

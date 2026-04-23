@@ -2,7 +2,7 @@
   display: none !important;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+/* Google Fonts are loaded via <link> in index.html for better performance */
 
 @tailwind base;
 @tailwind components;
@@ -72,6 +72,21 @@
 @layer base {
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
+
+  /* Scroll offset so sticky navbar never hides section headings */
+  section[id] { scroll-margin-top: 5rem; }
+
+  /* Global spring easing for all transitions */
+  a, button, [role="button"] {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Visible :active tap feedback for all interactive elements */
+  a:active, button:active, [role="button"]:active {
+    opacity: 0.75;
+    transform: scale(0.97);
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -106,6 +121,19 @@
 }
 
 @layer utilities {
+  /* Scroll progress bar — rendered as a ::after on the fixed header */
+  .scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--amazon-green)), hsl(var(--gold)));
+    z-index: 100;
+    transform-origin: left;
+    transition: width 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
   .leaf-pattern {
     background-image:
       radial-gradient(hsl(var(--amazon-green) / 0.06) 1px, transparent 1px),

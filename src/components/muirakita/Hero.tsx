@@ -14,6 +14,10 @@ export const Hero = () => {
         src={jungle}
         alt=""
         aria-hidden="true"
+        fetchPriority="high"
+        decoding="async"
+        width="1920"
+        height="1080"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
@@ -22,23 +26,22 @@ export const Hero = () => {
 
       <div className="container relative z-20 mx-auto">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <div className="overflow-hidden">
-            <h1
-              className="animate-clip-reveal font-display text-foreground"
-              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
-            >
-              Tecnologia que
-            </h1>
-          </div>
-          <div className="overflow-hidden">
-            <h1
-              className="animate-clip-reveal font-display"
-              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", animationDelay: "0.15s" }}
-            >
-              <span className="text-gradient-amazon">transforma</span>{" "}
-              <span className="text-foreground">seu negócio.</span>
-            </h1>
-          </div>
+          <h1 className="font-display" style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}>
+            <span className="block overflow-hidden">
+              <span className="block animate-clip-reveal text-foreground">
+                Tecnologia que
+              </span>
+            </span>
+            <span className="block overflow-hidden">
+              <span
+                className="block animate-clip-reveal"
+                style={{ animationDelay: "0.15s" }}
+              >
+                <span className="text-gradient-amazon">transforma</span>{" "}
+                <span className="text-foreground">seu negócio.</span>
+              </span>
+            </span>
+          </h1>
 
           <p
             className="mx-auto mt-6 max-w-2xl animate-clip-reveal text-base text-muted-foreground sm:text-lg md:text-xl"
