@@ -3,11 +3,11 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import { FrogLogo } from "./FrogLogo";
 
 const links = [
-  { href: "#inicio", label: "Início" },
+  { href: "#inicio",   label: "Início" },
   { href: "#servicos", label: "Serviços" },
+  { href: "#automacao",label: "Automação IA" },
   { href: "#historia", label: "Nossa História" },
-  { href: "#automacao", label: "Automação IA" },
-  { href: "#contato", label: "Contato" },
+  { href: "#contato",  label: "Contato" },
 ];
 
 export const WHATSAPP_URL = "https://wa.me/5593981126115";

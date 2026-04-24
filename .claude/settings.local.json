@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add https://ui.inference.sh/r/agent.json --yes)",
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest add https://ui.inference.sh/r/agent.json --yes --pm npm)",
+      "Bash(npx --yes shadcn add https://ui.inference.sh/r/agent.json --yes)",
+      "WebFetch(domain:ui.inference.sh)"
+    ]
+  }
+}

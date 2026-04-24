@@ -1,16 +1,31 @@
+import { useEffect, useRef } from "react";
 import { ArrowDown, MessageCircle } from "lucide-react";
 import { Fireflies } from "./Fireflies";
 import jungle from "@/assets/jungle-hero.jpg";
 import { WHATSAPP_URL } from "./Navbar";
 
 export const Hero = () => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (imgRef.current)  imgRef.current.style.transform  = `translateY(${y * 0.32}px)`;
+      if (textRef.current) textRef.current.style.transform = `translateY(${y * 0.12}px)`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section
       id="inicio"
       className="relative flex min-h-[78svh] w-full items-center overflow-hidden pt-24 pb-12 md:min-h-[85svh] md:pt-28 md:pb-16"
     >
-      {/* Background */}
+      {/* Parallax background */}
       <img
+        ref={imgRef}
         src={jungle}
         alt=""
         aria-hidden="true"
@@ -18,13 +33,14 @@ export const Hero = () => {
         decoding="async"
         width="1920"
         height="1080"
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        className="absolute inset-0 h-[115%] w-full object-cover opacity-70 will-change-transform"
+        style={{ top: "-7.5%" }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
-      <Fireflies count={10} />
+      <Fireflies count={14} />
 
-      <div className="container relative z-20 mx-auto">
+      <div ref={textRef} className="container relative z-20 mx-auto will-change-transform">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <h1 className="font-display" style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}>
             <span className="block overflow-hidden">

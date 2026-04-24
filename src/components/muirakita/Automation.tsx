@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Leaf, BrainCircuit, Zap, Smartphone, CheckCircle2, type LucideIcon } from "lucide-react";
 import { WHATSAPP_URL } from "./Navbar";
+import { useScramble } from "@/hooks/use-scramble";
 
 const nodes: { Icon: LucideIcon; label: string; color: string }[] = [
   { Icon: Leaf, label: "Lead Recebido", color: "hsl(var(--amazon-green))" },
@@ -11,6 +13,21 @@ const nodes: { Icon: LucideIcon; label: string; color: string }[] = [
 
 export const Automation = () => {
   const radius = 140;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [visible, setVisible] = useState(false);
+  const scrambled = useScramble("A floresta nunca dorme", visible, 45);
+
+  useEffect(() => {
+    const el = headingRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section id="automacao" className="relative overflow-hidden bg-background py-16 md:py-24">
       {/* Bioluminescent glow */}
@@ -44,8 +61,8 @@ export const Automation = () => {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-amazon">
             Automação com IA
           </p>
-          <h2 className="font-display text-foreground" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
-            A floresta nunca dorme
+          <h2 ref={headingRef} className="font-display text-foreground" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
+            {scrambled}
           </h2>
           <p className="mt-4 font-display text-2xl text-amazon md:text-3xl">
             E a sua empresa também não precisa.

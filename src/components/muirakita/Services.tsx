@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from "react";
 import { Cpu, Smartphone, Code2, Globe, ArrowLeftRight, MessageCircle } from "lucide-react";
 import { WHATSAPP_URL } from "./Navbar";
 import CardFlip from "@/components/ui/flip-card";
+import { useScramble } from "@/hooks/use-scramble";
 
 const cards = [
   {
@@ -47,14 +49,29 @@ const cards = [
 ];
 
 export const Services = () => {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [visible, setVisible] = useState(false);
+  const scrambled = useScramble("O que a Muirakitã Tech faz", visible, 50);
+
+  useEffect(() => {
+    const el = headingRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section id="servicos" className="relative overflow-hidden py-16 md:py-24">
       <div className="absolute inset-0 leaf-pattern opacity-40" aria-hidden="true" />
       <div className="container relative mx-auto">
         <header className="mb-12 max-w-3xl reveal-on-scroll">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-amazon">Serviços</p>
-          <h2 className="font-display text-gradient-amazon" style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}>
-            O que a Muirakitã Tech faz
+          <h2 ref={headingRef} className="font-display text-gradient-amazon" style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)" }}>
+            {scrambled}
           </h2>
           <p className="mt-4 text-muted-foreground">
             Da <span className="text-amazon font-semibold">automação com IA</span> ao app completo —

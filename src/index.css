@@ -204,4 +204,63 @@
     animation-timeline: view();
     animation-range: entry 0% entry 60%;
   }
+
+  @keyframes slide-in-card {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .animate-slide-in-card { animation: slide-in-card 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+}
+
+/* ── Custom cursor (hover-capable devices only) ────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: hsl(var(--amazon-green));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    transition: background 0.2s;
+  }
+  .cursor-dot.cursor-gold { background: hsl(var(--gold)); }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 36px; height: 36px;
+    border: 1.5px solid hsl(var(--amazon-green) / 0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    will-change: transform;
+    box-shadow: 0 0 18px hsl(var(--amazon-green) / 0.18);
+    transition:
+      width  0.35s cubic-bezier(0.16,1,0.3,1),
+      height 0.35s cubic-bezier(0.16,1,0.3,1),
+      border-color 0.25s,
+      box-shadow   0.25s;
+  }
+  .cursor-ring.cursor-expanded {
+    width: 56px; height: 56px;
+    border-color: hsl(var(--amazon-green) / 0.85);
+    box-shadow: 0 0 28px hsl(var(--amazon-green) / 0.3);
+  }
+}
+
+/* ── Grain overlay (premium texture) ──────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99997;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
 }
