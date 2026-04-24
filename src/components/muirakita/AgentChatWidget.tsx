@@ -8,11 +8,15 @@ import { inference } from '@inferencesh/sdk';
 const spring = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
 const PROXY_URL = `https://vqkpgomkcnjamolvzkxy.supabase.co/functions/v1/inference-proxy`;
+const DEV_KEY  = (import.meta as any).env?.VITE_INFERENCE_API_KEY as string | undefined;
 
-const client = inference({ proxyUrl: PROXY_URL });
+// Use direct key if available (dev), otherwise route through Supabase proxy (prod)
+const client = DEV_KEY
+  ? inference({ apiKey: DEV_KEY })
+  : inference({ proxyUrl: PROXY_URL });
 
 const agentConfig = {
-  core_app: { ref: 'openrouter/claude-sonnet-46' },
+  core_app: { ref: 'openrouter/claude-haiku-45' },
   system_prompt: `Você é o assistente virtual da Muirakitã Tech, uma empresa de tecnologia da Amazônia. Ajude visitantes a entender nossos serviços: automação com IA, criação de apps, sistemas sob medida, sites/landing pages e migração de sistemas. Seja amigável, direto e incentive o contato via WhatsApp (+55 93 98112-6115) para projetos específicos. Responda sempre em português brasileiro.`,
 };
 
