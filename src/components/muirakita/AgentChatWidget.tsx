@@ -1,138 +1,156 @@
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
-import { BotMessageSquare, X, SendHorizonal } from 'lucide-react';
+import { X, SendHorizonal, Leaf } from 'lucide-react';
 import { AgentChatProvider, useAgentChat, useAgentActions } from '@inferencesh/sdk/agent';
 import { inference } from '@inferencesh/sdk';
 
-// ── Constants ────────────────────────────────────────────────────────────────
+// ── Config ───────────────────────────────────────────────────────────────────
 
-const spring = 'cubic-bezier(0.16, 1, 0.3, 1)';
+const spring    = 'cubic-bezier(0.16, 1, 0.3, 1)';
+const PROXY_URL = 'https://vqkpgomkcnjamolvzkxy.supabase.co/functions/v1/inference-proxy';
+const DEV_KEY   = (import.meta as any).env?.VITE_INFERENCE_API_KEY as string | undefined;
 
-const PROXY_URL = `https://vqkpgomkcnjamolvzkxy.supabase.co/functions/v1/inference-proxy`;
-const DEV_KEY  = (import.meta as any).env?.VITE_INFERENCE_API_KEY as string | undefined;
-
-// Use direct key if available (dev), otherwise route through Supabase proxy (prod)
 const client = DEV_KEY
   ? inference({ apiKey: DEV_KEY })
   : inference({ proxyUrl: PROXY_URL });
 
 const agentConfig = {
   core_app: { ref: 'openrouter/claude-haiku-45' },
-  system_prompt: `Você é o assistente virtual da Muirakitã Tech, uma empresa de tecnologia da Amazônia. Ajude visitantes a entender nossos serviços: automação com IA, criação de apps, sistemas sob medida, sites/landing pages e migração de sistemas. Seja amigável, direto e incentive o contato via WhatsApp (+55 93 98112-6115) para projetos específicos. Responda sempre em português brasileiro.`,
+  system_prompt: `Você é o assistente virtual da Muirakitã Tech, empresa de tecnologia da Amazônia. Ajude visitantes a entender nossos serviços: automação com IA, apps, sistemas sob medida, sites/landing pages e migração. Seja direto, amigável, e incentive o contato via WhatsApp (+55 93 98112-6115) para projetos. Responda sempre em português. Respostas curtas e objetivas.`,
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-interface MsgBlock { type: string; text?: string; }
-interface Msg { id: string; role: string; content: MsgBlock[] | string; }
+interface Block { type: string; text?: string; }
+interface Msg   { id: string; role: string; content: Block[] | string; }
 
 const getText = (msg: Msg) =>
   Array.isArray(msg.content)
-    ? msg.content.filter((b) => b.type === 'text').map((b) => b.text ?? '').join('')
+    ? msg.content.filter(b => b.type === 'text').map(b => b.text ?? '').join('')
     : String(msg.content ?? '');
 
-// ── Inner chat UI (inside provider) ─────────────────────────────────────────
+// ── Inner UI ─────────────────────────────────────────────────────────────────
 
-function ChatInner() {
+function Terminal() {
   const { chat, messages } = useAgentChat();
-  const { sendMessage } = useAgentActions();
+  const { sendMessage }    = useAgentActions();
   const isBusy = chat?.status === 'busy';
 
   const [draft, setDraft] = useState('');
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const bottomRef  = useRef<HTMLDivElement>(null);
+  const inputRef   = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const submit = () => {
-    const text = draft.trim();
-    if (!text || isBusy) return;
-    sendMessage(text);
+    const t = draft.trim();
+    if (!t || isBusy) return;
+    sendMessage(t);
     setDraft('');
-    textareaRef.current?.focus();
+    inputRef.current?.focus();
   };
 
-  const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      submit();
-    }
+  const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') { e.preventDefault(); submit(); }
   };
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 rounded-t-2xl border-b"
-        style={{ borderColor: 'hsl(var(--amazon-green) / 0.2)', background: 'hsl(var(--amazon-green) / 0.08)' }}>
-        <div className="relative flex items-center justify-center h-9 w-9 rounded-full" style={{ background: 'hsl(var(--amazon-green) / 0.15)' }}>
-          <BotMessageSquare className="h-5 w-5 text-amazon" />
-          <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2"
-            style={{ background: '#22c55e', borderColor: 'hsl(var(--card))' }} />
+    <div className="flex flex-col h-full font-mono text-xs">
+
+      {/* ── Header ── */}
+      <div className="flex items-center justify-between px-4 py-3 border-b"
+        style={{ borderColor: 'hsl(var(--amazon-green) / 0.18)' }}>
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+              style={{ background: 'hsl(var(--amazon-green))' }} />
+            <span className="relative inline-flex h-2 w-2 rounded-full"
+              style={{ background: 'hsl(var(--amazon-green))' }} />
+          </span>
+          <span className="tracking-[0.35em] uppercase text-[10px]"
+            style={{ color: 'hsl(var(--amazon-green))' }}>
+            MUIRAKITÃ.AI
+          </span>
         </div>
-        <div>
-          <p className="text-sm font-semibold leading-none text-foreground">Assistente Muirakitã</p>
-          <p className="text-xs mt-0.5 text-amazon">Online agora</p>
-        </div>
+        <span className="text-[10px] tracking-wider" style={{ color: 'hsl(var(--muted-foreground))' }}>
+          {isBusy ? 'processando…' : 'online'}
+        </span>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-3">
-        {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4">
-            <div className="h-12 w-12 rounded-full flex items-center justify-center" style={{ background: 'hsl(var(--amazon-green) / 0.12)' }}>
-              <BotMessageSquare className="h-6 w-6 text-amazon" />
-            </div>
-            <p className="text-sm text-muted-foreground">Olá! Como posso ajudar você hoje?</p>
+      {/* ── Messages ── */}
+      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3"
+        style={{ scrollbarWidth: 'thin', scrollbarColor: 'hsl(var(--amazon-green) / 0.2) transparent' }}>
+
+        {messages.length === 0 && (
+          <div className="flex flex-col gap-1 pt-2">
+            <p style={{ color: 'hsl(var(--amazon-green))' }}>› sistema inicializado.</p>
+            <p style={{ color: 'hsl(var(--muted-foreground))' }}>
+              › olá! em que posso ajudar?
+            </p>
           </div>
-        ) : (
-          (messages as Msg[]).map((msg) => {
-            const isUser = msg.role === 'user';
-            const text = getText(msg);
-            if (!text) return null;
-            return (
-              <div key={msg.id} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-                <div
-                  className="max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-relaxed break-words"
-                  style={
-                    isUser
-                      ? { background: 'hsl(var(--amazon-green))', color: '#000' }
-                      : { background: 'hsl(var(--bg-overlay))', color: 'hsl(var(--foreground))' }
-                  }
-                >
-                  {text}
-                </div>
-              </div>
-            );
-          })
         )}
+
+        {(messages as Msg[]).map(msg => {
+          const text = getText(msg);
+          if (!text) return null;
+          const isUser = msg.role === 'user';
+
+          if (isUser) return (
+            <div key={msg.id} className="flex justify-end">
+              <span className="px-3 py-1 rounded-full text-[11px] font-sans font-medium"
+                style={{ background: 'hsl(var(--amazon-green))', color: '#000', maxWidth: '80%' }}>
+                {text}
+              </span>
+            </div>
+          );
+
+          return (
+            <div key={msg.id} className="pl-3 border-l-2"
+              style={{ borderColor: 'hsl(var(--amazon-green) / 0.35)' }}>
+              <p className="leading-relaxed" style={{ color: 'hsl(var(--foreground) / 0.88)' }}>
+                <span style={{ color: 'hsl(var(--amazon-green))' }}>› </span>
+                {text}
+              </p>
+            </div>
+          );
+        })}
+
         {isBusy && (
-          <div className="flex justify-start">
-            <div className="rounded-2xl px-4 py-2.5 text-sm flex gap-1" style={{ background: 'hsl(var(--bg-overlay))' }}>
-              {[0, 1, 2].map(i => (
-                <span key={i} className="h-1.5 w-1.5 rounded-full bg-muted-foreground animate-bounce"
-                  style={{ animationDelay: `${i * 0.15}s` }} />
-              ))}
-            </div>
+          <div className="pl-3 border-l-2 flex gap-1 items-center"
+            style={{ borderColor: 'hsl(var(--amazon-green) / 0.35)' }}>
+            <span style={{ color: 'hsl(var(--amazon-green))' }}>› </span>
+            {[0,1,2].map(i => (
+              <span key={i} className="inline-block h-1 w-1 rounded-full animate-pulse"
+                style={{ background: 'hsl(var(--amazon-green) / 0.7)', animationDelay: `${i * 0.2}s` }} />
+            ))}
           </div>
         )}
+
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div className="px-3 pb-3 pt-2 border-t" style={{ borderColor: 'hsl(var(--amazon-green) / 0.15)' }}>
-        <div className="flex items-end gap-2 rounded-xl border px-3 py-2" style={{ borderColor: 'hsl(var(--amazon-green) / 0.25)', background: 'hsl(var(--input))' }}>
-          <textarea ref={textareaRef} rows={1} value={draft} onChange={e => setDraft(e.target.value)}
-            onKeyDown={onKeyDown} placeholder="Escreva sua mensagem..." disabled={isBusy}
-            aria-label="Mensagem"
-            className="flex-1 resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-50"
-            style={{ maxHeight: '6rem' }} />
-          <button onClick={submit} disabled={!draft.trim() || isBusy} aria-label="Enviar mensagem"
-            className="flex items-center justify-center h-7 w-7 rounded-lg flex-shrink-0 disabled:opacity-40"
-            style={{ background: 'hsl(var(--amazon-green))', color: '#000', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}>
-            <SendHorizonal className="h-4 w-4" />
-          </button>
-        </div>
+      {/* ── Input ── */}
+      <div className="border-t px-4 py-3 flex items-center gap-2"
+        style={{ borderColor: 'hsl(var(--amazon-green) / 0.18)' }}>
+        <span className="flex-shrink-0 text-[11px]" style={{ color: 'hsl(var(--amazon-green))' }}>›</span>
+        <input
+          ref={inputRef}
+          type="text"
+          value={draft}
+          onChange={e => setDraft(e.target.value)}
+          onKeyDown={onKey}
+          disabled={isBusy}
+          placeholder="escreva aqui…"
+          aria-label="Mensagem"
+          className="flex-1 bg-transparent text-[11px] focus:outline-none disabled:opacity-40"
+          style={{ color: 'hsl(var(--foreground))', caretColor: 'hsl(var(--amazon-green))' }}
+        />
+        <button onClick={submit} disabled={!draft.trim() || isBusy} aria-label="Enviar"
+          className="flex-shrink-0 disabled:opacity-30 transition-opacity"
+          style={{ color: 'hsl(var(--amazon-green))' }}>
+          <SendHorizonal className="h-3.5 w-3.5" />
+        </button>
       </div>
     </div>
   );
@@ -143,65 +161,100 @@ function ChatInner() {
 export default function AgentChatWidget() {
   const [open, setOpen] = useState(false);
 
-
   return (
-    <div className="hidden md:flex flex-col items-end" style={{ position: 'fixed', bottom: '6rem', right: '1.5rem', zIndex: 50 }}>
-      {/* Chat panel */}
+    <div className="hidden md:block" style={{ position: 'fixed', bottom: '6rem', right: '1.5rem', zIndex: 50 }}>
+
+      {/* ── Chat panel ── */}
       <div
         aria-hidden={!open}
         style={{
-          width: '20rem',
-          height: '480px',
-          marginBottom: '0.75rem',
-          borderRadius: '1rem',
-          border: '1px solid hsl(var(--amazon-green) / 0.2)',
+          position: 'absolute',
+          bottom: 'calc(100% + 12px)',
+          right: 0,
+          width: '268px',
+          height: '388px',
+          borderRadius: '14px',
           background: 'hsl(var(--card))',
-          boxShadow: '0 20px 60px hsl(120 33% 4% / 0.6), 0 4px 16px hsl(var(--amazon-green) / 0.12)',
-          clipPath: open ? 'inset(0 0 0 0 round 1rem)' : 'inset(100% 0 0 0 round 1rem)',
+          border: '1px solid hsl(var(--amazon-green) / 0.22)',
+          boxShadow: `
+            0 0 0 1px hsl(var(--amazon-green) / 0.06),
+            0 24px 48px hsl(120 33% 4% / 0.7),
+            0 0 80px hsl(var(--amazon-green) / 0.06) inset
+          `,
+          /* scan-line texture */
+          backgroundImage: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 3px,
+              hsl(var(--amazon-green) / 0.015) 3px,
+              hsl(var(--amazon-green) / 0.015) 4px
+            ),
+            linear-gradient(hsl(var(--card)), hsl(var(--card)))
+          `,
+          clipPath: open ? 'inset(0 0 0 0 round 14px)' : 'inset(0 0 100% 0 round 14px)',
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
-          transition: `clip-path 400ms ${spring}, opacity 300ms ${spring}`,
+          transition: `clip-path 420ms ${spring}, opacity 280ms ${spring}`,
           overflow: 'hidden',
         }}
       >
         <AgentChatProvider client={client} agentConfig={agentConfig}>
-          <ChatInner />
+          <Terminal />
         </AgentChatProvider>
       </div>
 
-      {/* Toggle button */}
+      {/* ── FAB — organic blob that morphs to circle ── */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="relative flex items-center justify-center h-14 w-14 rounded-full shadow-lg focus:outline-none focus-visible:ring-2"
+        aria-label={open ? 'Fechar assistente' : 'Abrir assistente de IA'}
         style={{
-          background: 'hsl(var(--amazon-green))',
-          color: '#000',
-          boxShadow: '0 4px 20px hsl(var(--amazon-green) / 0.35)',
-          transitionTimingFunction: spring,
-          transitionDuration: '300ms',
-          transitionProperty: 'box-shadow, transform',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '52px',
+          height: '52px',
+          background: open
+            ? 'hsl(var(--amazon-green) / 0.15)'
+            : 'hsl(var(--card))',
+          border: `1.5px solid hsl(var(--amazon-green) / ${open ? '0.6' : '0.35'})`,
+          borderRadius: open
+            ? '50%'
+            : '30% 70% 70% 30% / 30% 30% 70% 70%',
+          boxShadow: open
+            ? '0 0 0 4px hsl(var(--amazon-green) / 0.12), 0 4px 20px hsl(var(--amazon-green) / 0.2)'
+            : '0 2px 12px hsl(120 33% 4% / 0.5)',
+          color: `hsl(var(--amazon-green))`,
+          transition: `border-radius 500ms ${spring}, background 300ms, border-color 300ms, box-shadow 300ms`,
+          position: 'relative',
+          overflow: 'hidden',
         }}
-        aria-label={open ? 'Fechar chat' : 'Abrir chat'}
       >
-        <span
-          style={{
+        {/* Shimmer on idle */}
+        {!open && (
+          <span style={{
             position: 'absolute',
-            opacity: open ? 0 : 1,
-            transform: open ? 'scale(0.6)' : 'scale(1)',
-            transition: `opacity 250ms ${spring}, transform 300ms ${spring}`,
-          }}
-        >
-          <BotMessageSquare className="h-6 w-6" />
+            inset: 0,
+            background: 'linear-gradient(135deg, transparent 40%, hsl(var(--amazon-green) / 0.08) 50%, transparent 60%)',
+            animation: 'shimmer 3s ease-in-out infinite',
+          }} />
+        )}
+
+        <span style={{
+          position: 'absolute',
+          transition: `opacity 250ms ${spring}, transform 300ms ${spring}`,
+          opacity: open ? 0 : 1,
+          transform: open ? 'scale(0.5) rotate(-45deg)' : 'scale(1) rotate(0deg)',
+        }}>
+          <Leaf className="h-5 w-5" />
         </span>
-        <span
-          style={{
-            position: 'absolute',
-            opacity: open ? 1 : 0,
-            transform: open ? 'scale(1)' : 'scale(0.6)',
-            transition: `opacity 250ms ${spring}, transform 300ms ${spring}`,
-          }}
-        >
-          <X className="h-6 w-6" />
+        <span style={{
+          position: 'absolute',
+          transition: `opacity 250ms ${spring}, transform 300ms ${spring}`,
+          opacity: open ? 1 : 0,
+          transform: open ? 'scale(1) rotate(0deg)' : 'scale(0.5) rotate(45deg)',
+        }}>
+          <X className="h-5 w-5" />
         </span>
       </button>
     </div>
