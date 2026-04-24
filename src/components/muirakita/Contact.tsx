@@ -22,12 +22,13 @@ export const Contact = () => {
             className="mt-5 font-display uppercase leading-[0.95] tracking-wide text-foreground"
             style={{ fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)" }}
           >
-            Tem uma ideia?{" "}
+            Conta pra gente.{" "}
             <span className="text-gradient-amazon">A floresta escuta.</span>
           </h2>
           <p className="mt-5 max-w-lg text-base text-muted-foreground sm:text-lg">
-            Conta o que você quer construir. Registramos sua mensagem e abrimos o WhatsApp para
-            continuar a conversa em tempo real — sem formulário robótico, sem auto-resposta vazia.
+            Descreva o que você quer resolver — pode ser uma ideia vaga, um problema concreto ou
+            uma dor que você ainda não sabe nomear. A gente responde no mesmo dia útil, em português,
+            sem script e sem enrolação.
           </p>
 
           <ul className="mt-8 space-y-3 text-sm sm:text-base">

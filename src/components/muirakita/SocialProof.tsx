@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Rocket, Users, Star, Clock } from "lucide-react";
 
 const stats = [
-  { icon: Rocket, value: "12+", num: 12, suffix: "+", label: "Projetos entregues" },
-  { icon: Users,  value: "8+",  num: 8,  suffix: "+", label: "Empresas atendidas" },
-  { icon: Star,   value: "100%",num: 100,suffix: "%", label: "Clientes satisfeitos" },
-  { icon: Clock,  value: "24h", num: 24, suffix: "h", label: "Tempo médio de resposta" },
+  { icon: Rocket, value: "12+", num: 12, suffix: "+", label: "Projetos entregues no prazo" },
+  { icon: Users,  value: "8+",  num: 8,  suffix: "+", label: "Empresas desbloqueadas" },
+  { icon: Star,   value: "100%",num: 100,suffix: "%", label: "Taxa de retenção de clientes" },
+  { icon: Clock,  value: "24h", num: 24, suffix: "h", label: "Resposta garantida" },
 ];
 
 function CountUp({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {
@@ -53,7 +53,7 @@ export const SocialProof = () => {
       <div className="absolute inset-0 leaf-pattern opacity-30" aria-hidden="true" />
       <div ref={ref} className="container relative mx-auto">
         <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.3em] text-amazon">
-          Resultados que falam
+          Números que importam
         </p>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((s, i) => {

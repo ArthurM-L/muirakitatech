@@ -2,28 +2,32 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "Quanto custa um projeto com a Muirakitã?",
-    a: "O investimento varia conforme escopo. Projetos de automação começam em torno de R$ 2.500 e sistemas/apps a partir de R$ 8.000. Fazemos um diagnóstico gratuito antes de qualquer proposta.",
+    q: "E se eu não souber exatamente o que preciso?",
+    a: "Essa é a situação mais comum — e mais bem-vinda. O diagnóstico gratuito existe exatamente para isso: você conta o problema, a gente traduz em solução. Não precisa chegar com especificação técnica, precisa chegar com a dor.",
   },
   {
-    q: "Em quanto tempo meu projeto fica pronto?",
-    a: "Automações simples saem em 1–2 semanas. Sistemas e apps completos variam de 4 a 12 semanas, com entregas semanais para você acompanhar a evolução.",
+    q: "Quanto custa um projeto?",
+    a: "Automações pontuais começam em R$ 2.500. Sistemas e apps a partir de R$ 8.000. O que define o preço é escopo — e o escopo fechamos juntos, com clareza total, antes de assinar qualquer coisa.",
   },
   {
-    q: "Vocês atendem clientes fora de Manaus / da Amazônia?",
-    a: "Sim. Atendemos o Brasil inteiro 100% remoto. Nossa raiz é amazônica, mas nossos clientes estão em todo o país.",
+    q: "Em quanto tempo fica pronto?",
+    a: "Automações simples: 1–2 semanas. Sistemas completos: 4–12 semanas, com entregas semanais. Você nunca fica esperando no escuro — acompanha o progresso em tempo real.",
   },
   {
-    q: "E depois da entrega? Tem suporte?",
-    a: "Sim. Oferecemos planos de suporte e evolução contínua, com SLA combinado e canal direto no WhatsApp para emergências.",
+    q: "Atendem fora de Manaus?",
+    a: "Atendemos o Brasil inteiro, 100% remoto. Nossa raiz é amazônica, mas nossos clientes estão de São Paulo ao Acre. A floresta tem fibra óptica.",
   },
   {
-    q: "Posso começar com algo pequeno e crescer depois?",
-    a: "Com certeza — recomendamos. Geralmente começamos por uma automação ou MVP, validamos resultado, e expandimos a partir daí.",
+    q: "E depois da entrega, ficam sumidos?",
+    a: "Não. Suporte direto no WhatsApp, SLA combinado em contrato, e planos de evolução contínua para quem quer crescer. Você não vai receber um email automático quando der problema.",
+  },
+  {
+    q: "Posso começar pequeno e expandir depois?",
+    a: "Essa é a abordagem que a gente recomenda. Começamos com o que resolve a dor mais urgente, validamos o resultado juntos, e construímos sobre uma base que já funciona.",
   },
   {
     q: "Os dados do meu negócio ficam seguros?",
-    a: "Sim. Trabalhamos com infraestrutura criptografada, conformidade LGPD e NDA quando necessário.",
+    a: "Sim. Infraestrutura criptografada, conformidade com a LGPD e NDA assinado quando necessário. Seus dados são seus — e continuam sendo.",
   },
 ];
 
@@ -34,7 +38,8 @@ export const FAQ = () => {
         <div className="text-center">
           <span className="text-xs uppercase tracking-[0.3em] text-amazon">Perguntas frequentes</span>
           <h2 className="mt-3 font-display text-3xl md:text-5xl">
-            Tira <span className="text-gradient-amazon">dúvidas</span> antes de falar
+            Perguntas que todo{" "}
+            <span className="text-gradient-amazon">cliente faz primeiro</span>
           </h2>
         </div>
 

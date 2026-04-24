@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/muirakita/Navbar";
 import { Hero } from "@/components/muirakita/Hero";
 import { TechMarquee } from "@/components/muirakita/TechMarquee";
+import { Problem } from "@/components/muirakita/Problem";
 import { Services } from "@/components/muirakita/Services";
 import { Process } from "@/components/muirakita/Process";
 import { Automation } from "@/components/muirakita/Automation";
@@ -28,31 +29,34 @@ const Index = () => {
       {/* 2. Credibility signal — tech stack logos */}
       <TechMarquee />
 
-      {/* 3. Social proof — numbers before services so visitor is primed */}
+      {/* 3. Problem — create empathy before pitching */}
+      <Problem />
+
+      {/* 4. Social proof — numbers to validate after problem recognition */}
       <SocialProof />
 
-      {/* 4. Services — what we do */}
+      {/* 5. Services — what we do */}
       <Services />
 
-      {/* 5. How we work — reduce risk in the mind of the buyer */}
+      {/* 6. How we work — reduce risk in the mind of the buyer */}
       <Process />
 
-      {/* 6. Automation — differentiated value prop */}
+      {/* 7. Automation — differentiated value prop */}
       <Automation />
 
-      {/* 7. ROI Calculator — make cost/benefit concrete */}
+      {/* 8. ROI Calculator — make cost/benefit concrete */}
       <ROICalculator />
 
-      {/* 8. Story — humanise the brand */}
+      {/* 9. Story — humanise the brand */}
       <Story />
 
-      {/* 9. FAQ — clear final objections */}
+      {/* 10. FAQ — clear final objections */}
       <FAQ />
 
-      {/* 10. Contact — ready to convert */}
+      {/* 11. Contact — ready to convert */}
       <Contact />
 
-      {/* 11. Final CTA — last push */}
+      {/* 12. Final CTA — last push */}
       <FinalCTA />
 
       <Footer />

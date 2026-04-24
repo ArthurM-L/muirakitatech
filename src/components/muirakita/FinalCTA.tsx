@@ -13,14 +13,14 @@ export const FinalCTA = () => {
       <div className="container relative mx-auto flex flex-col items-center text-center">
         <h2
           className="font-display text-gradient-amazon"
-          style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
+          style={{ fontSize: "clamp(2.2rem, 6vw, 5.5rem)" }}
         >
-          Pronto para evoluir?
+          Seu próximo projeto começa<br className="hidden md:block" /> com uma conversa.
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-          Agora que você conhece a <span className="text-amazon font-semibold">Muirakitã Tech</span>,
-          está pronto para transformar sua empresa com tecnologia real? Escolha o canal que preferir
-          e vamos construir juntos.
+        <p className="mx-auto mt-5 max-w-xl text-muted-foreground md:text-lg">
+          Sem compromisso, sem formulário robótico.{" "}
+          <span className="text-foreground font-medium">Fale agora com a Muirakitã Tech</span>{" "}
+          e descubra, em minutos, o que a tecnologia pode desbloquear no seu negócio.
         </p>
 
         <div className="mt-12 grid w-full max-w-3xl gap-4 sm:grid-cols-2">
