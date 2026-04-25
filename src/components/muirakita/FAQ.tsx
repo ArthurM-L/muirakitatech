@@ -14,8 +14,8 @@ const faqs = [
     a: "Automações simples: 1–2 semanas. Sistemas completos: 4–12 semanas, com entregas semanais. Você nunca fica esperando no escuro — acompanha o progresso em tempo real.",
   },
   {
-    q: "Atendem fora de Manaus?",
-    a: "Atendemos o Brasil inteiro, 100% remoto. Nossa raiz é amazônica, mas nossos clientes estão de São Paulo ao Acre. A floresta tem fibra óptica.",
+    q: "Atendem fora de Santarém, Manaus e Belém?",
+    a: "Atendemos o Brasil inteiro, 100% remoto. Nossa raiz é amazônica — Santarém, Manaus, Belém — mas nossos clientes estão de São Paulo ao Acre. A floresta tem fibra óptica.",
   },
   {
     q: "E depois da entrega, ficam sumidos?",
